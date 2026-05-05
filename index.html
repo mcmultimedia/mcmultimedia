@@ -1,175 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Word Bozz</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MC Multimedia | Creativity Lives Here</title>
+    <link href="https://googleapis.com" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #e50914; /* Media Red */
+            --bg: #0f0f0f;
+            --text: #ffffff;
+            --secondary-text: #b3b3b3;
+        }
 
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://unsplash.com'); /* Fallback movie-themed image */
+            background-size: cover;
+            background-position: center;
+        }
+
+        h1 { font-size: 3.5rem; margin-bottom: 1rem; letter-spacing: -1px; }
+        .hero p { font-size: 1.25rem; color: var(--secondary-text); max-width: 600px; margin-bottom: 2rem; }
+
+        /* Button */
+        .cta-button {
+            background-color: var(--primary);
+            color: white;
+            padding: 15px 40px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: transform 0.2s, background 0.2s;
+        }
+        .cta-button:hover {
+            transform: scale(1.05);
+            background-color: #ff0f1e;
+        }
+
+        /* Features Section */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 4rem 10%;
+            background: #181818;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 2rem;
+            border: 1px solid #333;
+            border-radius: 10px;
+        }
+
+        .feature-card h3 { color: var(--primary); margin-bottom: 1rem; }
+
+        footer {
+            text-align: center;
+            padding: 3rem;
+            color: var(--secondary-text);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
 <body>
 
-  <div class="game-wrapper">
+    <section class="hero">
+        <h1>MC MULTIMEDIA</h1>
+        <p>Creativity Lives Here. Watch your favorite movies, series, and more for as low as 1 GHS.</p>
+        <a href="#explore" class="cta-button">Start Watching Now</a>
+    </section>
 
-    <div class="header">
-      <div class="title">Word Bozz</div>
+    <section id="explore" class="features">
+        <div class="feature-card">
+            <h3>Unlimited Movies</h3>
+            <p>Access a vast library of the latest blockbusters and timeless classics.</p>
+        </div>
+        <div class="feature-card">
+            <h3>TV Series</h3>
+            <p>Binge-watch the most trending series with high-quality streaming.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Affordable Access</h3>
+            <p>Premium entertainment shouldn't break the bank. Plans starting from 1 GHS.</p>
+        </div>
+    </section>
 
-      <div class="header-right">
-        <button id="episodeListBtn" class="episodes-btn">☰ Episodes</button>
-        <button id="settingsBtn" class="settings-btn">⚙ Settings</button>
-        <button id="pauseBtn" class="settings-btn">⏸ Pause</button>
-        <div class="badge">EPISODE MODE</div>
-      </div>
-    </div>
+    <footer>
+        &copy; 2024 MC Multimedia. All rights reserved.
+    </footer>
 
-    <div class="episode-info">
-      <div class="episode-number" id="episodeNumber"></div>
-      <div class="episode-language" id="episodeLanguage"></div>
-      <div class="episode-type" id="episodeType"></div>
-    </div>
-
-    <div class="challenge-text" id="challengeText"></div>
-
-    <div id="cashTimer" class="cash-timer hidden"></div>
-
-    <input type="text" id="answerInput" placeholder="" autocomplete="off" />
-
-    <div id="virtualKeyboard" class="virtual-keyboard"></div>
-
-    <div class="btn-row">
-      <button id="hintBtn" class="btn-tertiary">✨ Use DigiToken (Hint)</button>
-      <button id="nextBtn" class="btn-secondary">Next Episode</button>
-    </div>
-
-<div class="status info" id="statusText"></div>
-    <div class="hint" id="hintText"></div>
-    <div id="foundWordsContainer">
-      <div class="word-scroll-box">
-
-        <h3>Required Words (<span id="requiredCount">0</span>/5)</h3>
-        <ul id="requiredWordsList"></ul>
-
-        <h3>Extra Words</h3>
-        <ul id="extraWordsList"></ul>
-
-      </div>
-    </div>
-
-    <div class="wallet">
-      <span>
-        <label>Cash:</label>
-        <strong id="walletBalance">GHS 0.00</strong>
-      </span>
-
-      <button id="switchOffBtn" class="switch-off-btn">SWITCH OFF</button>
-
-      <span>
-        <label>DigiTokens:</label>
-        <strong id="tokenBalance">0</strong>
-      </span>
-
-      <!-- Hidden, but kept for engine.js logic -->
-      <span class="fun-reward">
-        <label>Calabashes:</label>
-        <strong id="calabashCount">0</strong>
-      </span>
-      <span class="fun-reward">
-        <label>Ban Hammers:</label>
-        <strong id="banhammerCount">0</strong>
-      </span>
-    </div>
-    
-    <!-- Copyright Text -->
-<div class="footer-copyright-label"> MC MULTIMEDIA </div>
-<a href="https://www.mcmedia.top" class="url-link" target="_blank">
-    <div class="url-label">
-        www.mcmedia.top
-    </div>
-</a>
-
-
-
-
-  </div> <!-- .game-wrapper -->
-
-
-
-  <!-- POWER OFF OVERLAY -->
-  <div id="powerOffOverlay" class="modal hidden poweroff-overlay" aria-hidden="true">
-    <div class="modal-content poweroff-content" role="dialog" aria-label="Power off screen">
-        <img id="powerOffIcon" src="https://mcmedia.top/WordBozzLogo512.png" alt="WB Logo">
-      <h2 class="modal-title">Power Off</h2>
-      <p style="margin:8px 0 12px;">Word Bozz switched off. Turn Back On.</p>
-      <button id="powerOnBtn" class="modal-btn">TURN ON</button>
-    </div>
- </div>   
-    
-    
-    
-    
-  
-
-  <!-- EPISODE LIST MODAL -->
-  <div id="episodeListModal" class="modal hidden">
-    <div class="episode-list-shell">
-
-      <div class="episode-list-header">
-        <button id="seasonSelectorBtn" class="season-selector-btn">Season 1 ▼</button>
-      </div>
-
-      <div id="seasonDropdown" class="season-dropdown hidden">
-        <div class="season-option" data-season="0">Season 1</div>
-        <div class="season-option" data-season="1">Season 2</div>
-        <div class="season-option" data-season="2">Season 3</div>
-        <div class="season-option" data-season="3">Season 4</div>
-      </div>
-
-      <div id="episodeListContainer" class="episode-center-list"></div>
-
-      <button id="episodeListCloseBtn" class="modal-btn secondary small">Close</button>
-    </div>
-  </div>
-
-  <!-- SETTINGS MODAL -->
-  <div id="settingsModal" class="modal hidden">
-    <div class="modal-content settings-content">
-      <h2 class="modal-title">Settings</h2>
-
-      <p class="settings-subtitle">Input Mode</p>
-      <div class="settings-option">
-        <label>
-          <input type="radio" name="inputMode" value="keyboard" checked />
-          Virtual QWERTY keyboard
-        </label>
-      </div>
-
-      <button id="settingsCloseBtn" class="modal-btn secondary">Close</button>
-    </div>
-  </div>
-
-  <!-- EPISODE COMPLETE MODAL -->
-  <div id="episodeCompleteModal" class="modal hidden">
-    <div class="modal-content">
-      <h2 class="modal-title">🎉 Episode Complete!</h2>
-      <p>You found all required words.</p>
-      <button id="modalNextBtn" class="modal-btn">Next Episode</button>
-    </div>
-  </div>
-
-  
-  <!-- CONFETTI -->
-  <div id="confetti-container"></div>
-  
-  
-
-  <!-- PAUSE MODAL -->
-  <div id="pauseModal" class="modal hidden">
-    <div class="modal-content">
-      <h2 class="modal-title">Game Paused</h2>
-      <button id="resumeBtn" class="modal-btn">Resume</button>
-    </div>
-  </div>
-
-  <script src="engine.js"></script>
 </body>
 </html>
